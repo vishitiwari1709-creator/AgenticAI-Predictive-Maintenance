@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>🚗 Vehicle Safety & Maintenance Prototype — Voice Assistant</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- LOGIN VIEW -->
+<div id="login-view">
+    <div class="login-card">
+        <h1 style="color:#0056b3;margin:0 0 6px 0">🚗 Virtual Vehicle Safety & Training</h1>
+        <p style="color:var(--muted); margin:0 0 14px 0">Select your role to access relevant dashboards and tools.</p>
+
+        <div class="role-selection">
+            <div class="role-card card" onclick="showLoginForm('Owner')">
+                <h3>👤 Vehicle Owner</h3>
+                <p style="color:var(--muted); margin:8px 0 0 0">Safety alerts & service booking</p>
+            </div>
+            <div class="role-card card" onclick="showLoginForm('Technician')">
+                <h3>🛠 Technician</h3>
+                <p style="color:var(--muted); margin:8px 0 0 0">Virtual SOPs & diagnostics</p>
+            </div>
+            <div class="role-card card" onclick="showLoginForm('Manager')">
+                <h3>🏢 Fleet Manager</h3>
+                <p style="color:var(--muted); margin:8px 0 0 0">KPIs & compliance oversight</p>
+            </div>
+        </div>
+
+        <div id="role-login-form" class="card login-form" style="margin-top:20px; max-width:380px;">
+            <h3 id="form-title" style="margin-top:0;color:var(--primary)">Login</h3>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="Enter email" value="owner@example.com" />
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="Enter password" value="password" />
+            <button class="action-button" onclick="simulateLogin()">Log In</button>
+            <button class="action-button" style="background:#6c757d;margin-top:8px" onclick="hideLoginForm()">← Back</button>
+        </div>
+    </div>
+</div>
+
+<!-- OWNER VIEW -->
+<div id="owner-view" style="display:none">
+    <div class="header">
+        <div>👤 <strong>Owner Dashboard</strong> | Virtual Vehicle Assistant</div>
+        <div style="display:flex;gap:12px;align-items:center">
+            <span>Welcome, Owner</span>
+            <button style="background:none;border:none;color:#fff;cursor:pointer" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="container" id="main-container">
+        <h2 style="color:var(--primary)">✅ Vehicle Safety Status</h2>
+        <div class="card status-card">
+            <div style="font-size:2.2rem">✅</div>
+            <div>
+                <h3 style="margin:0">2024 Sedan (VIN: XYZ1234)</h3>
+                <p style="margin:6px 0">Overall Status: <strong>Good to Go</strong> | Last Check: <strong>Today</strong></p>
+                <p style="margin:0;color:var(--muted)">Safety Note: TPMS OK</p>
+            </div>
+        </div>
+
+        <h2>Quick Actions</h2>
+        <div class="action-grid">
+            <button class="action-button" onclick="openFaultModal()">🚨 Report a Fault</button>
+            <button class="action-button" onclick="openServiceModal()">📅 Book Service</button>
+            <button class="action-button" onclick="alert('Owner Safety Briefing opened')">📘 Owner Safety Briefing</button>
+        </div>
+
+        <hr style="margin:24px 0">
+
+        <h2>Safety & Compliance</h2>
+        <div class="card">
+            <div style="margin-bottom:10px">
+                <strong>Critical Recalls:</strong> <span style="color:var(--danger);font-weight:700">🚨 1 Critical Recall Pending (Brake Fluid Sensor)</span>
+            </div>
+            <div style="margin-bottom:10px">
+                <strong>Next Mandatory Maintenance:</strong> <span style="color:var(--warning)">⚠️ Minor Service Due in 2,850 km</span>
+            </div>
+            <div>
+                <strong>Emergency Roadside Safety:</strong>
+                <a href="https://www.google.com/search?q=roadside+emergency+safety+tips" target="_blank">View Procedures</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TECHNICIAN VIEW -->
+<div id="technician-view" style="display:none">
+    <div class="header">
+        <div>🛠 <strong>Technician Dashboard</strong> | Virtual Training Hub</div>
+        <div style="display:flex;gap:12px;align-items:center">
+            <span id="technician-welcome-info">Welcome, Technician</span>
+            <button style="background:none;border:none;cursor:pointer" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="container" id="tech-container">
+        <h2 style="color:var(--warning)">🚨 Mandatory Safety & Certification</h2>
+        <div class="card">
+            <ul class="compliance-list">
+                <li class="compliance-item" style="font-weight:700">
+                    <span>HV Certification (Level 2):</span>
+                    <span style="color:var(--danger)">⚠️ DUE (7 days)</span>
+                </li>
+                <li class="compliance-item">
+                    <span>Current Task: SR#458 - DTC P0A08 (HV System)</span>
+                    <a class="action-button" style="background:var(--success);" onclick="alert('HV Battery Diagnosis Module launched')">Launch HV Battery Diagnosis</a>
+                </li>
+                <li class="compliance-item">
+                    <span>PPE Compliance Score:</span>
+                    <span style="color:var(--success);font-weight:700">100% (Today)</span>
+                </li>
+            </ul>
+        </div>
+
+        <h2 style="color:var(--warning)">📚 Virtual Technical Library</h2>
+        <div class="action-grid">
+            <button class="action-button" style="background:#6c757d" onclick="alert('Search SOPs')">🔍 Search All SOPs</button>
+            <button class="action-button" style="background:#6c757d" onclick="alert('HV Diagrams')">⚡ HV System Diagrams</button>
+            <button class="action-button" style="background:#6c757d" onclick="alert('Torque specs')">🔧 Torque Specifications</button>
+        </div>
+
+        <hr style="margin:24px 0">
+        <h2 style="color:var(--warning)">📍 Active Service Dispatch</h2>
+        <div class="card">
+            <ul class="compliance-list">
+                <li class="compliance-item">
+                    <span>SR#458 | 🚨 DTC P0A08 - Assigned to You</span>
+                    <a class="action-button" style="background:var(--danger)" onclick="alert('Navigate to vehicle')">Navigate to Vehicle (Map)</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- MANAGER VIEW -->
+<div id="manager-view" style="display:none">
+    <div class="header">
+        <div>🏢 <strong>Manager Dashboard</strong> | Safety & Compliance Oversight</div>
+        <div style="display:flex;gap:12px;align-items:center">
+            <span id="manager-welcome-info">Welcome, Manager</span>
+            <button style="background:none;border:none;color:#fff;cursor:pointer" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="container" id="mgr-container">
+        <h2 style="color:var(--danger)">🚦 Safety & Compliance KPIs</h2>
+        <div class="kpi-grid">
+            <div class="card" style="background:#e6f7e6">
+                <div style="color:var(--success);font-size:20px;font-weight:700">98%</div>
+                <div>Technician Training Compliance</div>
+            </div>
+            <div class="card" style="background:#fff3cd">
+                <div style="color:var(--warning);font-size:20px;font-weight:700">4</div>
+                <div>Critical Safety Alerts</div>
+            </div>
+            <div class="card" style="background:#f8d7da">
+                <div style="color:var(--danger);font-size:20px;font-weight:700">P0300</div>
+                <div>Top Recurring Fault</div>
+            </div>
+            <div class="card" style="background:#d1ecf1">
+                <div style="color:var(--primary);font-size:20px;font-weight:700">1.2 days</div>
+                <div>Avg. Service Resolution</div>
+            </div>
+        </div>
+
+        <hr style="margin:24px 0">
+        <h2 style="color:var(--danger)">🛠️ Pending Service Requests</h2>
+        <div class="card">
+            <ul class="compliance-list">
+                <li class="compliance-item">
+                    <span>SR#456 | 🚨 Brake Failure Sensor</span>
+                    <a class="action-button" style="background:var(--danger)" onclick="alert('Dispatching technician')">Dispatch Technician</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- FAULT MODAL -->
+<div id="faultModal" class="modal" onclick="if(event.target===this) closeFaultModal()">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeFaultModal()">×</button>
+        <h2>🚨 Report a Fault/Issue</h2>
+        <form onsubmit="alert('Fault Reported!'); closeFaultModal(); return false;">
+            <label>Fault Type</label>
+            <select id="faultType" required style="width:100%;padding:10px;margin-bottom:12px">
+                <option value="light">Warning Light on Dashboard</option>
+                <option value="noise">Noise or Vibration</option>
+            </select>
+            <label>Current Vehicle Location</label>
+            <p style="margin:8px 0 16px 0"><a href="https://www.google.com/maps" target="_blank" style="color:var(--danger)">📍 Open Google Maps</a></p>
+            <button type="submit" class="action-button" style="width:100%; background:var(--danger)">Submit Service Request</button>
+        </form>
+    </div>
+</div>
+
+<!-- SERVICE MODAL -->
+<div id="serviceModal" class="modal" onclick="if(event.target===this) closeServiceModal()">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeServiceModal()">×</button>
+        <h2>📅 Book Service Appointment</h2>
+        <form onsubmit="alert('Appointment Scheduled!'); closeServiceModal(); return false;">
+            <label>Required Service</label>
+            <select id="serviceType" required style="width:100%;padding:10px;margin-bottom:12px">
+                <option value="oil">Oil Change</option>
+                <option value="diagnostic">Diagnostic Check</option>
+            </select>
+            <label>Preferred Date</label>
+            <input type="date" id="serviceDate" required style="width:100%;padding:10px;margin-bottom:12px" value="2025-11-15">
+            <button type="submit" class="action-button" style="width:100%">Confirm Booking</button>
+        </form>
+    </div>
+</div>
+
+<!-- CHATBOX -->
+<div id="chatbox-container" aria-live="polite" role="region">
+    <div id="chat-header">
+        <div style="display:flex;gap:12px;align-items:center">
+            <strong>AI Technical Assistant 🤖</strong>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+            <div class="chat-controls" title="Click to speak: start/stop">
+                <button id="mic-btn" onclick="toggleMic()" aria-pressed="false">🎤</button>
+            </div>
+            <button id="chatbox-toggle" onclick="toggleChatbox()">–</button>
+        </div>
+    </div>
+
+    <div id="chat-messages"></div>
+
+    <div id="chat-input-area">
+        <input id="chat-input" placeholder="Ask a question..." onkeydown="if(event.key==='Enter') sendMessage()"/>
+        <button class="action-button" onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>
